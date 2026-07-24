@@ -31,8 +31,8 @@ const toast = document.getElementById('toastMessage');
 const toastText = document.getElementById('toastText');
 const serviceSelect = document.getElementById('serviceSelect');
 
-let selectedService = null;       // currently selected service object
-let selectedTierIndex = 0;        // default tier
+let selectedService = null;
+let selectedTierIndex = 0;
 let selectedServiceName = '';
 
 // ─── build service cards ─────────────────────────────────
@@ -54,24 +54,18 @@ function buildCards() {
 
 // ─── select service ──────────────────────────────────────
 function selectService(svc, cardEl) {
-  // remove previous selection
   document.querySelectorAll('.service-card.selected').forEach(el => el.classList.remove('selected'));
   if (cardEl) cardEl.classList.add('selected');
 
   selectedService = svc;
   selectedServiceName = svc.name;
 
-  // update estimator
   estimatorTitle.textContent = svc.name;
   estimatorDesc.textContent = `Choose a package for "${svc.name}" – estimated costs in Kenyan Shillings.`;
 
-  // build options
   renderTiers();
-
-  // update form select
   serviceSelect.value = svc.name;
 
-  // show estimator
   estimatorCard.style.display = 'block';
   estimatorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
@@ -139,20 +133,15 @@ estimatorContactBtn.addEventListener('click', () => {
 
 // ─── form submission feedback ───────────────────────────
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-  // Formspree handles submission; we just show a toast.
-  // The form will redirect to Formspree's thank-you page by default.
-  // We'll keep it native – but we can show a toast before redirect.
   showToast('Sending your message...');
-  // Allow native submission.
 });
 
 // ─── init ────────────────────────────────────────────────
 buildCards();
-estimatorCard.style.display = 'none'; // hidden initially
+estimatorCard.style.display = 'none';
 selectedTierIndex = 0;
 renderTiers();
 
-// Also update estimator when dropdown changes (for manual selection)
 serviceSelect.addEventListener('change', function() {
   const val = this.value;
   if (!val) return;
