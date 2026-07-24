@@ -1,5 +1,5 @@
 #  Nexify – Premium Services Landing Page
-
+LIVE SITE : https://kepcmaster-pixel.github.io/Nexify/
 A modern, responsive, glassmorphism-inspired landing page showcasing premium professional services. Built using **HTML, CSS, and Vanilla JavaScript**, Nexify provides an elegant interface with interactive service cards, live demo functionality, and smooth user interactions.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
