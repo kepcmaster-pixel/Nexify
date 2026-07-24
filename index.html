@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>Nexify · premium services</title>
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font for extra elegance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #f1f7fe;
+      background-image: radial-gradient(circle at 10% 20%, rgba(41, 128, 185, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 70%, rgba(22, 160, 133, 0.04) 0%, transparent 60%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.8rem;
+      line-height: 1.5;
+      color: #0d2b3e;
+    }
+
+    /* main card – glassmorphism + subtle glow */
+    .app {
+      max-width: 1400px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 3.5rem;
+      box-shadow: 0 30px 60px rgba(0, 20, 30, 0.08), 0 10px 30px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+      padding: 2.8rem 2.8rem;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* header with gradient accent */
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+      background: linear-gradient(145deg, #0b2b3b, #1b4a62);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo i {
+      font-size: 2.2rem;
+      background: linear-gradient(145deg, #2a7faa, #1b5e7a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: transform 0.25s ease;
+    }
+
+    .logo:hover i {
+      transform: rotate(-6deg) scale(1.1);
+    }
+
+    .cta-small {
+      background: linear-gradient(145deg, #0d2f40, #1a4a60);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 14px rgba(13, 47, 64, 0.15);
+      letter-spacing: 0.01em;
+    }
+
+    .cta-small i {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .cta-small:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(13, 47, 64, 0.2);
+      background: linear-gradient(145deg, #123d52, #1f5a76);
+    }
+
+    .cta-small:active {
+      transform: scale(0.96);
+    }
+
+    /* tagline with gradient border */
+    .tagline {
+      font-size: 1.15rem;
+      color: #1b4057;
+      margin-bottom: 2.8rem;
+      font-weight: 400;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.9rem 1.8rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+    }
+
+    .tagline i {
+      color: #2a7faa;
+      margin-right: 0.6rem;
+    }
+
+    .tagline strong {
+      font-weight: 700;
+      background: linear-gradient(145deg, #0b2b3b, #1f5b78);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* service grid – elevated cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 2.8rem;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 1.8rem 1.2rem 1.4rem;
+      border-radius: 2.4rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(255, 255, 255, 0.8);
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+      text-align: center;
+      cursor: default;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      will-change: transform, box-shadow, background;
+    }
+
+    .service-card i {
+      font-size: 2.5rem;
+      background: linear-gradient(145deg, #1f5b78, #2a7faa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.2rem;
+      transition: all 0.2s;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0b2b3b;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      font-size: 0.8rem;
+      color: #2b5a70;
+      opacity: 0.8;
+      max-width: 140px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    /* interactive states – more premium */
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 40px -12px rgba(24, 60, 80, 0.15), 0 0 0 1px #b8d9ed;
+      border-color: rgba(59, 143, 194, 0.3);
+    }
+
+    .service-card:active {
+      transform: scale(0.95) translateY(-2px);
+      transition-duration: 0.08s;
+      background: #eaf4fc;
+    }
+
+    .service-card:hover i {
+      transform: scale(1.08) rotate(2deg);
+      background: linear-gradient(145deg, #006994, #2a8ab8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .service-card.clicked {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: #2a7faa;
+      box-shadow: 0 0 0 3px rgba(42, 127, 170, 0.25), 0 12px 28px -8px rgba(42, 127, 170, 0.15);
+      transform: translateY(-4px);
+      backdrop-filter: blur(4px);
+    }
+
+    .service-card.clicked i {
+      background: linear-gradient(145deg, #0a4b66, #1d7aa3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* bottom row – elegant */
+    .bottom-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.8rem;
+      margin-top: 0.8rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-badge {
+      display: flex;
+      gap: 2.2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.4rem 1.4rem 0.4rem 1rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+      color: #0d2b3e;
+    }
+
+    .stat-item i {
+      color: #2a7faa;
+      font-size: 1.1rem;
+    }
+
+    .stat-item span {
+      font-weight: 600;
+    }
+
+    .action-btn {
+      background: linear-gradient(145deg, #0b2b3b, #1b4a62);
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 60px;
+      color: white;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px -6px rgba(11, 43, 59, 0.2);
+      letter-spacing: 0.01em;
+    }
+
+    .action-btn i {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px -8px rgba(11, 43, 59, 0.25);
+      background: linear-gradient(145deg, #123d52, #1f5a76);
+    }
+
+    .action-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* toast – refined */
+    .toast-msg {
+      position: fixed;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(140px);
+      background: rgba(10, 30, 45, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: white;
+      padding: 0.9rem 2.5rem;
+      border-radius: 80px;
+      font-weight: 500;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 0.4s;
+      opacity: 0;
+      pointer-events: none;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 999;
+      letter-spacing: 0.01em;
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-msg i {
+      color: #7fc1e0;
+      font-size: 1.2rem;
+    }
+
+    /* responsive */
+    @media (max-width: 720px) {
+      body { padding: 1rem; }
+      .app { padding: 1.8rem 1.2rem; border-radius: 2.4rem; }
+      .brand { flex-direction: column; align-items: flex-start; }
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .service-card { padding: 1.4rem 0.6rem; }
+      .service-card i { font-size: 2rem; }
+      .service-card h3 { font-size: 0.95rem; }
+      .bottom-row { flex-direction: column; align-items: stretch; }
+      .stat-badge { justify-content: center; }
+      .action-btn { justify-content: center; }
+      .tagline { font-size: 0.95rem; padding: 0.6rem 1.2rem; }
+    }
+
+    @media (max-width: 420px) {
+      .grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+      .app { padding: 1.2rem 0.8rem; }
+      .stat-badge { gap: 1rem; }
+      .stat-item { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+    }
+
+    /* tiny spark */
+    .glow-pulse {
+      animation: glowPulse 3s infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- header -->
+  <div class="brand">
+    <div class="logo">
+      <i class="fas fa-bolt"></i>
+      <span>Nexify</span>
+    </div>
+    <button class="cta-small" id="liveDemoBtn">
+      <i class="fas fa-play-circle"></i> Live demo
+    </button>
+  </div>
+
+  <div class="tagline">
+    <i class="fas fa-rocket"></i>
+    <strong>9 expert services</strong> — resume · dev · security · analytics & more
+  </div>
+
+  <!-- SERVICE GRID (all 9) -->
+  <div class="grid" id="serviceGrid">
+    <div class="service-card" data-service="Resume/CV">
+      <i class="fas fa-file-alt"></i>
+      <h3>Resume/CV</h3>
+      <p>ATS‑optimized, standout</p>
+    </div>
+    <div class="service-card" data-service="Mobile app">
+      <i class="fas fa-mobile-alt"></i>
+      <h3>Mobile app</h3>
+      <p>iOS · Android · Flutter</p>
+    </div>
+    <div class="service-card" data-service="Database">
+      <i class="fas fa-database"></i>
+      <h3>Database</h3>
+      <p>SQL, NoSQL, tuning</p>
+    </div>
+    <div class="service-card" data-service="Cybersecurity">
+      <i class="fas fa-shield-alt"></i>
+      <h3>Cybersecurity</h3>
+      <p>Audit, pentest, zero‑trust</p>
+    </div>
+    <div class="service-card" data-service="Project mgmt">
+      <i class="fas fa-tasks"></i>
+      <h3>Project mgmt</h3>
+      <p>Agile, scrum, delivery</p>
+    </div>
+    <div class="service-card" data-service="Research">
+      <i class="fas fa-search"></i>
+      <h3>Online research</h3>
+      <p>Data‑driven insights</p>
+    </div>
+    <div class="service-card" data-service="Tutoring">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <h3>Online tutoring</h3>
+      <p>STEM, languages, coding</p>
+    </div>
+    <div class="service-card" data-service="Business consulting">
+      <i class="fas fa-chart-line"></i>
+      <h3>Business consulting</h3>
+      <p>Strategy, ops, growth</p>
+    </div>
+    <div class="service-card" data-service="Data analysis">
+      <i class="fas fa-chart-pie"></i>
+      <h3>Data analysis</h3>
+      <p>Python, BI, dashboards</p>
+    </div>
+  </div>
+
+  <!-- bottom row -->
+  <div class="bottom-row">
+    <div class="stat-badge">
+      <div class="stat-item"><i class="fas fa-check-circle"></i> <span id="clickCounter">0</span> selected</div>
+      <div class="stat-item"><i class="fas fa-clock"></i> <span id="liveIndicator">⚡ ready</span></div>
+    </div>
+    <button class="action-btn" id="resetBtn"><i class="fas fa-sync-alt"></i> reset</button>
+  </div>
+</div>
+
+<!-- toast -->
+<div class="toast-msg" id="toastMessage">
+  <i class="fas fa-info-circle"></i>
+  <span id="toastText">service clicked</span>
+</div>
+
+<script>
+  (function() {
+    const cards = document.querySelectorAll('.service-card');
+    const clickCounterSpan = document.getElementById('clickCounter');
+    const liveIndicator = document.getElementById('liveIndicator');
+    const resetBtn = document.getElementById('resetBtn');
+    const toast = document.getElementById('toastMessage');
+    const toastText = document.getElementById('toastText');
+    const liveDemoBtn = document.getElementById('liveDemoBtn');
+
+    let clickCount = 0;
+
+    function showToast(msg, isSuccess = true) {
+      toastText.textContent = msg;
+      toast.classList.add('show');
+      const icon = toast.querySelector('i');
+      if (isSuccess) {
+        icon.className = 'fas fa-check-circle';
+        icon.style.color = '#7fc1e0';
+      } else {
+        icon.className = 'fas fa-info-circle';
+        icon.style.color = '#f5b87e';
+      }
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    function updateCounter() {
+      clickCounterSpan.textContent = clickCount;
+      if (clickCount > 0) {
+        liveIndicator.innerHTML = `⚡ ${clickCount} active`;
+        liveIndicator.style.color = '#1f7a5a';
+      } else {
+        liveIndicator.innerHTML = '⚡ ready';
+        liveIndicator.style.color = '#2a4b5e';
+      }
+    }
+
+    function resetHighlights() {
+      cards.forEach(c => c.classList.remove('clicked'));
+      clickCount = 0;
+      updateCounter();
+      showToast('✨ highlights cleared', true);
+    }
+
+    function handleCardClick(e) {
+      const card = e.currentTarget;
+      const wasClicked = card.classList.contains('clicked');
+      if (wasClicked) {
+        card.classList.remove('clicked');
+        clickCount = Math.max(0, clickCount - 1);
+        showToast(`⬅️ ${card.dataset.service} deselected`, false);
+      } else {
+        card.classList.add('clicked');
+        clickCount += 1;
+        showToast(`✅ ${card.dataset.service} selected`, true);
+      }
+      updateCounter();
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', handleCardClick);
+    });
+
+    resetBtn.addEventListener('click', resetHighlights);
+
+    liveDemoBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      resetHighlights();
+      const shuffled = Array.from(cards).sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
+      selected.forEach(card => {
+        card.classList.add('clicked');
+      });
+      clickCount = selected.length;
+      updateCounter();
+      const names = selected.map(c => c.dataset.service).join(', ');
+      showToast(`🎯 demo: ${names}`, true);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        resetHighlights();
+        e.preventDefault();
+      }
+    });
+
+    updateCounter();
+  })();
+</script>
+</body>
+</html>
